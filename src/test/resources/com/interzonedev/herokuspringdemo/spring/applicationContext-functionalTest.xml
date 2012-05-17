@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<!--<context:component-scan base-package="com.interzonedev.herokuspringdemo" /> -->
+	<context:component-scan base-package="com.interzonedev.herokuspringdemo.functionaltest" />
 
 	<import resource="classpath:com/interzonedev/herokuspringdemo/spring/dataSourceContext.xml" />
 
@@ -25,5 +25,4 @@
 
 	<bean id="firefoxDriver" class="org.openqa.selenium.firefox.FirefoxDriver" destroy-method="close" />
 
-	<bean id="functionalTestHelper" class="com.interzonedev.herokuspringdemo.FunctionalTestHelper" />
 </beans>

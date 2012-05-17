@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.interzonedev.herokuspringdemo.functionaltest.FunctionalTestHelper;
 import com.interzonedev.sprintfix.AbstractIntegrationTest;
 import com.interzonedev.sprintfix.dataset.dbunit.DbUnitDataSetTester;
 

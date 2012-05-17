@@ -1,4 +1,4 @@
-package com.interzonedev.herokuspringdemo;
+package com.interzonedev.herokuspringdemo.functionaltest;
 
 import java.util.Properties;
 
@@ -8,7 +8,7 @@ import javax.inject.Named;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-//@Named("functionalTestHelper")
+@Named("functionalTestHelper")
 public class FunctionalTestHelper {
 
 	@Inject
