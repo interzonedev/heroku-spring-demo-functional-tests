@@ -1,7 +1,5 @@
 package com.interzonedev.herokuspringdemo;
 
-import java.util.Properties;
-
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
@@ -10,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.interzonedev.sprintfix.AbstractIntegrationTest;
@@ -28,26 +25,13 @@ public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractInt
 	protected DbUnitDataSetTester dbUnitDataSetTester;
 
 	@Inject
-	protected Properties functionalTestProperties;
-
-	@Inject
-	private FirefoxDriver firefoxDriver;
+	protected FunctionalTestHelper functionalTestHelper;
 
 	protected WebDriver driver;
 
 	@Before
 	public void beforeTest() {
-
-		String browserId = functionalTestProperties.getProperty("browser");
-
-		Browser browser = Browser.getById(browserId);
-		switch (browser) {
-			case FIREFOX:
-				driver = firefoxDriver;
-				break;
-			default:
-				throw new IllegalArgumentException("Unrecognized browser: " + browser);
-		}
+		driver = functionalTestHelper.getWebDriver();
 	}
 
 	@After
