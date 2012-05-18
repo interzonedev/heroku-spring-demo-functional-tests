@@ -5,6 +5,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ViewAllUsersFunctionalTest.class })
+@SuiteClasses({ NewUserFunctionalTest.class, ViewAllUsersFunctionalTest.class })
 public class UsersTestSuite {
 }

@@ -6,8 +6,11 @@ import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.interzonedev.sprintfix.AbstractIntegrationTest;
@@ -37,5 +40,18 @@ public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractInt
 	@After
 	public void afterTest() {
 		driver = null;
+	}
+
+	protected void openPageAndTestHeader(String url, String headerText) {
+		log.debug("openPageAndTestHeader");
+
+		functionalTestHelper.openPage(driver, url);
+
+		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
+		Assert.assertNotNull(contentContainer);
+
+		WebElement pageHeader = driver.findElement(By.cssSelector("div#contentContainer div.pageHeader"));
+		Assert.assertNotNull(pageHeader);
+		Assert.assertTrue(pageHeader.getText().endsWith(headerText));
 	}
 }

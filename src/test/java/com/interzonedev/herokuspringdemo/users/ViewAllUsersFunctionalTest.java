@@ -17,7 +17,7 @@ public class ViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunction
 	public void testViewAllUsersWithUsers() {
 		log.debug("testViewAllUsersWithUsers");
 
-		openPageAndTestHeader();
+		openPageAndTestHeader("users", "View All Users");
 
 		List<WebElement> userContainers = driver.findElements(By.cssSelector("div.userContainer"));
 		Assert.assertNotNull(userContainers);
@@ -29,24 +29,11 @@ public class ViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunction
 	public void testViewAllUsersNoUsers() {
 		log.debug("testViewAllUsersNoUsers");
 
-		openPageAndTestHeader();
+		openPageAndTestHeader("users", "View All Users");
 
 		WebElement viewAllUsersContainers = driver.findElement(By.cssSelector("div.viewAllUsers"));
 		Assert.assertNotNull(viewAllUsersContainers);
 		Assert.assertTrue(viewAllUsersContainers.getText().contains("There are no results."));
-	}
-
-	private void openPageAndTestHeader() {
-		log.debug("openPageAndTestHeader");
-
-		functionalTestHelper.openPage(driver, "users");
-
-		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
-		Assert.assertNotNull(contentContainer);
-
-		WebElement pageHeader = driver.findElement(By.cssSelector("div#contentContainer div.pageHeader"));
-		Assert.assertNotNull(pageHeader);
-		Assert.assertTrue(pageHeader.getText().endsWith("View All Users"));
 	}
 
 }
