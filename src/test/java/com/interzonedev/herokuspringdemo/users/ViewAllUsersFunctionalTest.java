@@ -7,24 +7,17 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.interzonedev.herokuspringdemo.HerokuSpringDemoAbstractFunctionalTest;
+import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstractFunctionalTest;
 import com.interzonedev.sprintfix.dataset.DataSet;
 
-public class TestViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunctionalTest {
+public class ViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunctionalTest {
 
 	@Test
 	@DataSet(filename = "dataset/users/multiUsersDataSet.xml", dataSourceBeanId = "dataSource")
 	public void testViewAllUsersWithUsers() {
 		log.debug("testViewAllUsersWithUsers");
 
-		functionalTestHelper.openPage(driver, "/users");
-
-		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
-		Assert.assertNotNull(contentContainer);
-
-		WebElement pageHeader = driver.findElement(By.cssSelector("div#contentContainer div.pageHeader"));
-		Assert.assertNotNull(pageHeader);
-		Assert.assertTrue(pageHeader.getText().endsWith("View All Users"));
+		openPageAndTestHeader();
 
 		List<WebElement> userContainers = driver.findElements(By.cssSelector("div.userContainer"));
 		Assert.assertNotNull(userContainers);
@@ -36,7 +29,17 @@ public class TestViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunc
 	public void testViewAllUsersNoUsers() {
 		log.debug("testViewAllUsersNoUsers");
 
-		functionalTestHelper.openPage(driver, "/users");
+		openPageAndTestHeader();
+
+		WebElement viewAllUsersContainers = driver.findElement(By.cssSelector("div.viewAllUsers"));
+		Assert.assertNotNull(viewAllUsersContainers);
+		Assert.assertTrue(viewAllUsersContainers.getText().contains("There are no results."));
+	}
+
+	private void openPageAndTestHeader() {
+		log.debug("openPageAndTestHeader");
+
+		functionalTestHelper.openPage(driver, "users");
 
 		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
 		Assert.assertNotNull(contentContainer);
@@ -44,9 +47,6 @@ public class TestViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunc
 		WebElement pageHeader = driver.findElement(By.cssSelector("div#contentContainer div.pageHeader"));
 		Assert.assertNotNull(pageHeader);
 		Assert.assertTrue(pageHeader.getText().endsWith("View All Users"));
-
-		WebElement viewAllUsersContainers = driver.findElement(By.cssSelector("div.viewAllUsers"));
-		Assert.assertNotNull(viewAllUsersContainers);
-		Assert.assertTrue(viewAllUsersContainers.getText().contains("There are no results."));
 	}
+
 }
