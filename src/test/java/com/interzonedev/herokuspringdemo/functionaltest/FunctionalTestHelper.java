@@ -1,5 +1,6 @@
 package com.interzonedev.herokuspringdemo.functionaltest;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -76,8 +77,8 @@ public class FunctionalTestHelper {
 				return ((null == text) || element.getText().equals(text));
 			}
 		};
-		Wait<WebDriver> pageLoadWait = new WebDriverWait(driver, timeOutInSeconds);
 
+		Wait<WebDriver> pageLoadWait = new WebDriverWait(driver, timeOutInSeconds);
 		pageLoadWait.until(pageLoadCondition);
 	}
 
@@ -96,5 +97,30 @@ public class FunctionalTestHelper {
 	public WebElement waitForAndGetElementWithText(WebDriver driver, By by, String text, long timeOutInSeconds) {
 		waitForElementWithText(driver, by, text, timeOutInSeconds);
 		return driver.findElement(by);
+	}
+
+	public void waitForElements(WebDriver driver, final By by) {
+		waitForElements(driver, by, getDefaultElementWaitTimeoutInSeconds());
+	}
+
+	public void waitForElements(WebDriver driver, final By by, long timeOutInSeconds) {
+		ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver d) {
+				List<WebElement> elements = d.findElements(by);
+				return !elements.isEmpty();
+			}
+		};
+
+		Wait<WebDriver> pageLoadWait = new WebDriverWait(driver, timeOutInSeconds);
+		pageLoadWait.until(pageLoadCondition);
+	}
+
+	public List<WebElement> waitForAndGetElements(WebDriver driver, By by) {
+		return waitForAndGetElements(driver, by, getDefaultElementWaitTimeoutInSeconds());
+	}
+
+	public List<WebElement> waitForAndGetElements(WebDriver driver, By by, long timeOutInSeconds) {
+		waitForElements(driver, by, timeOutInSeconds);
+		return driver.findElements(by);
 	}
 }
