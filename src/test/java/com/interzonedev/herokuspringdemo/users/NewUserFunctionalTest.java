@@ -47,8 +47,7 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 
 		submitButton.click();
 
-		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
-		Assert.assertNotNull(contentContainer);
+		confirmPageLoad();
 
 		WebElement firstNameErrors = driver.findElement(By.id("firstName.errors"));
 		Assert.assertNotNull(firstNameErrors);
@@ -74,8 +73,7 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 
 		submitButton.click();
 
-		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
-		Assert.assertNotNull(contentContainer);
+		confirmPageLoad();
 
 		WebElement lastNameErrors = driver.findElement(By.id("lastName.errors"));
 		Assert.assertNotNull(lastNameErrors);
@@ -105,8 +103,7 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 
 		submitButton.click();
 
-		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
-		Assert.assertNotNull(contentContainer);
+		confirmPageLoad();
 
 		WebElement firstNameErrors = driver.findElement(By.id("firstName.errors"));
 		Assert.assertNotNull(firstNameErrors);
@@ -136,8 +133,7 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 
 		submitButton.click();
 
-		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
-		Assert.assertNotNull(contentContainer);
+		confirmPageLoad();
 
 		WebElement lastNameErrors = driver.findElement(By.id("lastName.errors"));
 		Assert.assertNotNull(lastNameErrors);
@@ -167,8 +163,7 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 
 		submitButton.click();
 
-		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
-		Assert.assertNotNull(contentContainer);
+		confirmPageLoad();
 
 		WebElement globalErrors = driver.findElement(By.id("userForm.errors"));
 		Assert.assertNotNull(globalErrors);
@@ -202,8 +197,7 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 
 		submitButton.click();
 
-		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
-		Assert.assertNotNull(contentContainer);
+		confirmPageLoad();
 
 		testHeader("View User");
 
