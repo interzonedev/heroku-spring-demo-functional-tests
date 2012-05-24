@@ -53,6 +53,12 @@ public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractInt
 
 		functionalTestHelper.openPage(driver, url);
 
+		confirmPageLoadAndTestHeader(headerText);
+	}
+
+	protected void confirmPageLoadAndTestHeader(String headerText) {
+		log.debug("confirmPageLoadAndTestHeader");
+
 		confirmPageLoad();
 
 		testHeader(headerText);

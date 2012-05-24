@@ -39,6 +39,40 @@ public class ViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunction
 
 	@Test
 	@DataSet(filename = "dataset/users/multiUsersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testViewAllUsersClickViewLink() {
+		log.debug("testViewAllUsersClickViewLink");
+
+		openPageAndTestHeader("users", "View All Users");
+
+		List<WebElement> viewLinks = driver.findElements(By.cssSelector("a.control-view"));
+		Assert.assertNotNull(viewLinks);
+		Assert.assertEquals(2, viewLinks.size());
+
+		WebElement firstViewLink = viewLinks.get(0);
+		firstViewLink.click();
+
+		confirmPageLoadAndTestHeader("View User");
+	}
+
+	@Test
+	@DataSet(filename = "dataset/users/multiUsersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testViewAllUsersClickEditLink() {
+		log.debug("testViewAllUsersClickEditLink");
+
+		openPageAndTestHeader("users", "View All Users");
+
+		List<WebElement> editLinks = driver.findElements(By.cssSelector("a.control-edit"));
+		Assert.assertNotNull(editLinks);
+		Assert.assertEquals(2, editLinks.size());
+
+		WebElement firstEditLink = editLinks.get(0);
+		firstEditLink.click();
+
+		confirmPageLoadAndTestHeader("User Form");
+	}
+
+	@Test
+	@DataSet(filename = "dataset/users/multiUsersDataSet.xml", dataSourceBeanId = "dataSource")
 	public void testViewAllUsersDeleteUserAccept() {
 		log.debug("testViewAllUsersDeleteUserAccept");
 

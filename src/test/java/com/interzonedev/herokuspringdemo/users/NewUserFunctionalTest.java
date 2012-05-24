@@ -197,9 +197,7 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 
 		submitButton.click();
 
-		confirmPageLoad();
-
-		testHeader("View User");
+		confirmPageLoadAndTestHeader("View User");
 
 		WebElement firstNameContainer = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]"));
 		Assert.assertNotNull(firstNameContainer);
