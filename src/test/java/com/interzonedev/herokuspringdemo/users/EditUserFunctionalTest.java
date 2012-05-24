@@ -11,36 +11,38 @@ import org.openqa.selenium.WebElement;
 import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstractFunctionalTest;
 import com.interzonedev.sprintfix.dataset.DataSet;
 
-public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTest {
+public class EditUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTest {
 
 	@Test
-	public void testDisplayNewUserForm() {
-		log.debug("testDisplayNewUserForm");
+	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testDisplayEditUserForm() {
+		log.debug("testDisplayEditUserForm");
 
-		openPageAndTestHeader("users/new", "User Form");
+		openPageAndTestHeader("users/1/edit", "User Form");
 
 		WebElement firstNameInput = driver.findElement(By.id("firstName"));
 		Assert.assertNotNull(firstNameInput);
 
 		String firstNameValue = firstNameInput.getAttribute("value");
-		Assert.assertEquals("", firstNameValue);
+		Assert.assertEquals("Gern", firstNameValue);
 
 		WebElement lastNameInput = driver.findElement(By.id("lastName"));
 		Assert.assertNotNull(lastNameInput);
 
 		String lastNameValue = lastNameInput.getAttribute("value");
-		Assert.assertEquals("", lastNameValue);
+		Assert.assertEquals("Blanston", lastNameValue);
 	}
 
 	@Test
-	public void testPostNewUserFormFirstNameEmpty() {
-		log.debug("testPostNewUserFormFirstNameEmpty");
+	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testPostEditUserFormFirstNameEmpty() {
+		log.debug("testPostEditUserFormFirstNameEmpty");
 
-		openPageAndTestHeader("users/new", "User Form");
+		openPageAndTestHeader("users/1/edit", "User Form");
 
-		WebElement lastNameInput = driver.findElement(By.id("lastName"));
-		Assert.assertNotNull(lastNameInput);
-		lastNameInput.sendKeys("lastname");
+		WebElement firstNameInput = driver.findElement(By.id("firstName"));
+		Assert.assertNotNull(firstNameInput);
+		firstNameInput.clear();
 
 		WebElement submitButton = driver.findElement(By.cssSelector("form#userForm div.buttons input"));
 		Assert.assertNotNull(submitButton);
@@ -59,14 +61,15 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 	}
 
 	@Test
-	public void testPostNewUserFormLastNameEmpty() {
-		log.debug("testPostNewUserFormLastNameEmpty");
+	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testPostEditUserFormLastNameEmpty() {
+		log.debug("testPostEditUserFormLastNameEmpty");
 
-		openPageAndTestHeader("users/new", "User Form");
+		openPageAndTestHeader("users/1/edit", "User Form");
 
-		WebElement firstNameInput = driver.findElement(By.id("firstName"));
-		Assert.assertNotNull(firstNameInput);
-		firstNameInput.sendKeys("firstname");
+		WebElement lastNameInput = driver.findElement(By.id("lastName"));
+		Assert.assertNotNull(lastNameInput);
+		lastNameInput.clear();
 
 		WebElement submitButton = driver.findElement(By.cssSelector("form#userForm div.buttons input"));
 		Assert.assertNotNull(submitButton);
@@ -85,18 +88,16 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 	}
 
 	@Test
-	public void testPostNewUserFormFirstNameTooLong() {
-		log.debug("testPostNewUserFormFirstNameTooLong");
+	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testPostEditUserFormFirstNameTooLong() {
+		log.debug("testPostEditUserFormFirstNameTooLong");
 
-		openPageAndTestHeader("users/new", "User Form");
+		openPageAndTestHeader("users/1/edit", "User Form");
 
 		WebElement firstNameInput = driver.findElement(By.id("firstName"));
 		Assert.assertNotNull(firstNameInput);
+		firstNameInput.clear();
 		firstNameInput.sendKeys(StringUtils.repeat("a", 256));
-
-		WebElement lastNameInput = driver.findElement(By.id("lastName"));
-		Assert.assertNotNull(lastNameInput);
-		lastNameInput.sendKeys("lastname");
 
 		WebElement submitButton = driver.findElement(By.cssSelector("form#userForm div.buttons input"));
 		Assert.assertNotNull(submitButton);
@@ -115,17 +116,15 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 	}
 
 	@Test
-	public void testPostNewUserFormLastNameTooLong() {
-		log.debug("testPostNewUserFormLastNameTooLong");
+	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testPostEditUserFormLastNameTooLong() {
+		log.debug("testPostEditUserFormLastNameTooLong");
 
-		openPageAndTestHeader("users/new", "User Form");
-
-		WebElement firstNameInput = driver.findElement(By.id("firstName"));
-		Assert.assertNotNull(firstNameInput);
-		firstNameInput.sendKeys("firstname");
+		openPageAndTestHeader("users/1/edit", "User Form");
 
 		WebElement lastNameInput = driver.findElement(By.id("lastName"));
 		Assert.assertNotNull(lastNameInput);
+		lastNameInput.clear();
 		lastNameInput.sendKeys(StringUtils.repeat("a", 256));
 
 		WebElement submitButton = driver.findElement(By.cssSelector("form#userForm div.buttons input"));
@@ -145,18 +144,16 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 	}
 
 	@Test
-	public void testPostNewUserFormIdenticalFirstAndLastName() {
-		log.debug("testPostNewUserFormIdenticalFirstAndLastName");
+	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testPostEditUserFormIdenticalFirstAndLastName() {
+		log.debug("testPostEditUserFormIdenticalFirstAndLastName");
 
-		openPageAndTestHeader("users/new", "User Form");
-
-		WebElement firstNameInput = driver.findElement(By.id("firstName"));
-		Assert.assertNotNull(firstNameInput);
-		firstNameInput.sendKeys("name");
+		openPageAndTestHeader("users/1/edit", "User Form");
 
 		WebElement lastNameInput = driver.findElement(By.id("lastName"));
 		Assert.assertNotNull(lastNameInput);
-		lastNameInput.sendKeys("name");
+		lastNameInput.clear();
+		lastNameInput.sendKeys("Gern");
 
 		WebElement submitButton = driver.findElement(By.cssSelector("form#userForm div.buttons input"));
 		Assert.assertNotNull(submitButton);
@@ -171,21 +168,23 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 	}
 
 	@Test
-	@DataSet(filename = "dataset/users/emptyUsersDataSet.xml", dataSourceBeanId = "dataSource")
-	public void testPostNewUserFormValid() {
-		log.debug("testPostNewUserFormValid");
+	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testPostEditUserFormValid() {
+		log.debug("testPostEditUserFormValid");
 
-		String firstName = "Gern";
-		String lastName = "Blanston";
+		String firstName = "Uncle";
+		String lastName = "Fester";
 
-		openPageAndTestHeader("users/new", "User Form");
+		openPageAndTestHeader("users/1/edit", "User Form");
 
 		WebElement firstNameInput = driver.findElement(By.id("firstName"));
 		Assert.assertNotNull(firstNameInput);
+		firstNameInput.clear();
 		firstNameInput.sendKeys(firstName);
 
 		WebElement lastNameInput = driver.findElement(By.id("lastName"));
 		Assert.assertNotNull(lastNameInput);
+		lastNameInput.clear();
 		lastNameInput.sendKeys(lastName);
 
 		WebElement adminInput = driver.findElement(By.id("admin"));
@@ -209,9 +208,9 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 
 		WebElement adminContainer = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[4]"));
 		Assert.assertNotNull(adminContainer);
-		Assert.assertTrue(adminContainer.getText().contains("true"));
+		Assert.assertTrue(adminContainer.getText().contains("false"));
 
-		dbUnitDataSetTester.compareDataSetsIgnoreColumns(dataSource, "dataset/users/usersDataSet.xml", "users",
+		dbUnitDataSetTester.compareDataSetsIgnoreColumns(dataSource, "dataset/users/updatedUserDataSet.xml", "users",
 				USERS_IGNORE_COLUMN_NAMES);
 	}
 }
