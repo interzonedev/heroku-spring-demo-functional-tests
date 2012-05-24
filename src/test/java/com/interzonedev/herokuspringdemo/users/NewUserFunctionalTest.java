@@ -30,6 +30,10 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 
 		String lastNameValue = lastNameInput.getAttribute("value");
 		Assert.assertEquals("", lastNameValue);
+
+		List<WebElement> viewLinks = driver.findElements(By.cssSelector("a.control-view"));
+		Assert.assertNotNull(viewLinks);
+		Assert.assertTrue(viewLinks.isEmpty());
 	}
 
 	@Test

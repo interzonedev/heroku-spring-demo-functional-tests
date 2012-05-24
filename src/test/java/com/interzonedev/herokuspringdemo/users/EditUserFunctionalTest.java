@@ -31,6 +31,12 @@ public class EditUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTe
 
 		String lastNameValue = lastNameInput.getAttribute("value");
 		Assert.assertEquals("Blanston", lastNameValue);
+
+		WebElement viewLink = driver.findElement(By.cssSelector("a.control-view"));
+		Assert.assertNotNull(viewLink);
+
+		String hrefValue = viewLink.getAttribute("href");
+		Assert.assertTrue(hrefValue.contains("/users/1"));
 	}
 
 	@Test
