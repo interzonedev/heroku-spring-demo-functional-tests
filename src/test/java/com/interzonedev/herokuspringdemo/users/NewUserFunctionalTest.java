@@ -1,10 +1,11 @@
 package com.interzonedev.herokuspringdemo.users;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstractFunctionalTest;
@@ -53,14 +54,9 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 		Assert.assertNotNull(firstNameErrors);
 		Assert.assertEquals("First name can not be empty.", firstNameErrors.getText());
 
-		boolean caughtException = false;
-		try {
-			driver.findElement(By.id("lastName.errors"));
-			Assert.fail();
-		} catch (NoSuchElementException nsee) {
-			caughtException = true;
-		}
-		Assert.assertTrue(caughtException);
+		List<WebElement> lastNameErrors = driver.findElements(By.id("lastName.errors"));
+		Assert.assertNotNull(lastNameErrors);
+		Assert.assertTrue(lastNameErrors.isEmpty());
 	}
 
 	@Test
@@ -85,14 +81,9 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 		Assert.assertNotNull(lastNameErrors);
 		Assert.assertEquals("Last name can not be empty.", lastNameErrors.getText());
 
-		boolean caughtException = false;
-		try {
-			driver.findElement(By.id("firstName.errors"));
-			Assert.fail();
-		} catch (NoSuchElementException nsee) {
-			caughtException = true;
-		}
-		Assert.assertTrue(caughtException);
+		List<WebElement> firstNameErrors = driver.findElements(By.id("firstName.errors"));
+		Assert.assertNotNull(firstNameErrors);
+		Assert.assertTrue(firstNameErrors.isEmpty());
 	}
 
 	@Test
@@ -121,14 +112,9 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 		Assert.assertNotNull(firstNameErrors);
 		Assert.assertEquals("First name must be between 1 and 255 characters.", firstNameErrors.getText());
 
-		boolean caughtException = false;
-		try {
-			driver.findElement(By.id("lastName.errors"));
-			Assert.fail();
-		} catch (NoSuchElementException nsee) {
-			caughtException = true;
-		}
-		Assert.assertTrue(caughtException);
+		List<WebElement> lastNameErrors = driver.findElements(By.id("lastName.errors"));
+		Assert.assertNotNull(lastNameErrors);
+		Assert.assertTrue(lastNameErrors.isEmpty());
 	}
 
 	@Test
@@ -157,14 +143,9 @@ public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTes
 		Assert.assertNotNull(lastNameErrors);
 		Assert.assertEquals("Last name must be between 1 and 255 characters.", lastNameErrors.getText());
 
-		boolean caughtException = false;
-		try {
-			driver.findElement(By.id("firstName.errors"));
-			Assert.fail();
-		} catch (NoSuchElementException nsee) {
-			caughtException = true;
-		}
-		Assert.assertTrue(caughtException);
+		List<WebElement> firstNameErrors = driver.findElements(By.id("firstName.errors"));
+		Assert.assertNotNull(firstNameErrors);
+		Assert.assertTrue(firstNameErrors.isEmpty());
 	}
 
 	@Test
