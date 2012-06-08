@@ -15,8 +15,20 @@ public class EditUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTe
 
 	@Test
 	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
-	public void testDisplayEditUserForm() {
-		log.debug("testDisplayEditUserForm");
+	public void testDisplayEditUserFormNonExistentUser() {
+		log.debug("testDisplayEditUserFormNonExistentUser");
+
+		openPageAndTestHeader("users/2/edit", "Error");
+
+		WebElement errorContainer = driver.findElement(By.cssSelector("div#errorsContainer div.errorContainer"));
+
+		Assert.assertTrue(errorContainer.getText().contains("Could not find the specified resource."));
+	}
+
+	@Test
+	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testDisplayEditUserFormExistentUser() {
+		log.debug("testDisplayEditUserFormExistentUser");
 
 		openPageAndTestHeader("users/1/edit", "User Form");
 
