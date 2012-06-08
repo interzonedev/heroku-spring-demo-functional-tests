@@ -22,6 +22,7 @@ public class EditUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTe
 
 		WebElement errorContainer = driver.findElement(By.cssSelector("div#errorsContainer div.errorContainer"));
 
+		Assert.assertNotNull(errorContainer);
 		Assert.assertTrue(errorContainer.getText().contains("Could not find the specified resource."));
 	}
 
