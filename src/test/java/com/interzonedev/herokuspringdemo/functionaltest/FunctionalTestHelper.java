@@ -9,10 +9,10 @@ import javax.inject.Named;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.context.ApplicationContext;
 
 @Named("functionalTestHelper")
 public class FunctionalTestHelper {
@@ -21,7 +21,7 @@ public class FunctionalTestHelper {
 	private Properties functionalTestProperties;
 
 	@Inject
-	private FirefoxDriver firefoxDriver;
+	private ApplicationContext applicationContext;
 
 	public WebDriver getWebDriver() {
 		return getWebDriver(functionalTestProperties.getProperty("browser"));
@@ -41,7 +41,19 @@ public class FunctionalTestHelper {
 
 		switch (browser) {
 			case FIREFOX:
-				driver = firefoxDriver;
+				driver = (WebDriver) applicationContext.getBean("firefoxDriver");
+				break;
+			case HTMLUNIT:
+				driver = (WebDriver) applicationContext.getBean("htmlUnitDriver");
+				break;
+			case SAFARI:
+				driver = (WebDriver) applicationContext.getBean("safariDriver");
+				break;
+			case CHROME:
+				driver = (WebDriver) applicationContext.getBean("chromeDriver");
+				break;
+			case IE:
+				driver = (WebDriver) applicationContext.getBean("internetExplorerDriver");
 				break;
 			default:
 				throw new IllegalArgumentException("Unrecognized browser: " + browser);

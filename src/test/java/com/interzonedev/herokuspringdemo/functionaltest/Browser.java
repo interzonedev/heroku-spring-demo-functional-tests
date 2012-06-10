@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public enum Browser {
-	IE("iexplorer"), FIREFOX("firefox"), CHROME("chrome"), HTMLUNIT("htmlUnit");
+	IE("internetExplorer"), FIREFOX("firefox"), CHROME("chrome"), SAFARI("safari"), HTMLUNIT("htmlUnit");
 
 	private final static List<String> ids = new LinkedList<String>();
 

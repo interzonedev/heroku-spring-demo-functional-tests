@@ -23,6 +23,19 @@
 			value="classpath:com/interzonedev/herokuspringdemo/properties/functional.test.properties" />
 	</bean>
 
-	<bean id="firefoxDriver" class="org.openqa.selenium.firefox.FirefoxDriver" destroy-method="close" />
+	<bean id="firefoxDriver" class="org.openqa.selenium.firefox.FirefoxDriver" lazy-init="true"
+		destroy-method="close" />
+
+	<bean id="htmlUnitDriver" class="org.openqa.selenium.htmlunit.HtmlUnitDriver" lazy-init="true"
+		destroy-method="close" />
+
+	<bean id="safariDriver" class="org.openqa.selenium.safari.SafariDriver" lazy-init="true"
+		destroy-method="close" />
+
+	<bean id="chromeDriver" class="org.openqa.selenium.chrome.ChromeDriver" lazy-init="true"
+		destroy-method="close" />
+
+	<bean id="internetExplorerDriver" class="org.openqa.selenium.ie.InternetExplorerDriver"
+		lazy-init="true" destroy-method="close" />
 
 </beans>
