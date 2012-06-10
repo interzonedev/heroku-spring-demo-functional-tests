@@ -3,6 +3,7 @@ package com.interzonedev.herokuspringdemo.functionaltest;
 import java.util.List;
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,16 +20,22 @@ public class FunctionalTestHelper {
 	@Inject
 	private Properties functionalTestProperties;
 
-	public void openPage(WebDriver driver, String url) {
-		driver.get(functionalTestProperties.getProperty("applicationUrl") + url);
+	private String applicationUrl;
+
+	private Long elementWaitTimeoutInSeconds;
+	
+	@PostConstruct
+	public void init() {
+		applicationUrl = functionalTestProperties.getProperty("applicationUrl");
+		elementWaitTimeoutInSeconds = Long.parseLong(functionalTestProperties.getProperty("elementWaitTimeoutInSeconds", "10"));
 	}
 
-	public Long getDefaultElementWaitTimeoutInSeconds() {
-		return Long.parseLong(functionalTestProperties.getProperty("elementWaitTimeoutInSeconds"));
+	public void openPage(WebDriver driver, String url) {
+		driver.get(applicationUrl + url);
 	}
 
 	public void waitForElement(WebDriver driver, By by) {
-		waitForElement(driver, by, getDefaultElementWaitTimeoutInSeconds());
+		waitForElement(driver, by, elementWaitTimeoutInSeconds);
 	}
 
 	public void waitForElement(WebDriver driver, By by, long timeOutInSeconds) {
@@ -36,7 +43,7 @@ public class FunctionalTestHelper {
 	}
 
 	public void waitForElementWithText(WebDriver driver, By by, String text) {
-		waitForElementWithText(driver, by, text, getDefaultElementWaitTimeoutInSeconds());
+		waitForElementWithText(driver, by, text, elementWaitTimeoutInSeconds);
 	}
 
 	public void waitForElementWithText(WebDriver driver, final By by, final String text, long timeOutInSeconds) {
@@ -52,7 +59,7 @@ public class FunctionalTestHelper {
 	}
 
 	public WebElement waitForAndGetElement(WebDriver driver, By by) {
-		return waitForAndGetElementWithText(driver, by, null, getDefaultElementWaitTimeoutInSeconds());
+		return waitForAndGetElementWithText(driver, by, null, elementWaitTimeoutInSeconds);
 	}
 
 	public WebElement waitForAndGetElement(WebDriver driver, By by, long timeOutInSeconds) {
@@ -60,7 +67,7 @@ public class FunctionalTestHelper {
 	}
 
 	public WebElement waitForAndGetElementWithText(WebDriver driver, By by, String text) {
-		return waitForAndGetElementWithText(driver, by, text, getDefaultElementWaitTimeoutInSeconds());
+		return waitForAndGetElementWithText(driver, by, text, elementWaitTimeoutInSeconds);
 	}
 
 	public WebElement waitForAndGetElementWithText(WebDriver driver, By by, String text, long timeOutInSeconds) {
@@ -69,7 +76,7 @@ public class FunctionalTestHelper {
 	}
 
 	public void waitForElements(WebDriver driver, final By by) {
-		waitForElements(driver, by, getDefaultElementWaitTimeoutInSeconds());
+		waitForElements(driver, by, elementWaitTimeoutInSeconds);
 	}
 
 	public void waitForElements(WebDriver driver, final By by, long timeOutInSeconds) {
@@ -85,7 +92,7 @@ public class FunctionalTestHelper {
 	}
 
 	public List<WebElement> waitForAndGetElements(WebDriver driver, By by) {
-		return waitForAndGetElements(driver, by, getDefaultElementWaitTimeoutInSeconds());
+		return waitForAndGetElements(driver, by, elementWaitTimeoutInSeconds);
 	}
 
 	public List<WebElement> waitForAndGetElements(WebDriver driver, By by, long timeOutInSeconds) {
