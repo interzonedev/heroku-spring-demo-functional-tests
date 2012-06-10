@@ -48,8 +48,8 @@ public class EditUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTe
 		WebElement viewLink = driver.findElement(By.cssSelector("a.control-view"));
 		Assert.assertNotNull(viewLink);
 
-		String hrefValue = viewLink.getAttribute("href");
-		Assert.assertTrue(hrefValue.contains("/users/1"));
+		String viewLinkHrefValue = viewLink.getAttribute("href");
+		Assert.assertTrue(viewLinkHrefValue.contains("/users/1"));
 	}
 
 	@Test
@@ -231,5 +231,22 @@ public class EditUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTe
 
 		dbUnitDataSetTester.compareDataSetsIgnoreColumns(dataSource, "dataset/users/updatedUserDataSet.xml", "users",
 				USERS_IGNORE_COLUMN_NAMES);
+	}
+
+	@Test
+	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+	public void testEditFormClickViewLink() {
+		log.debug("testEditFormClickViewLink");
+
+		openPageAndTestHeader("users/1/edit", "User Form");
+
+		WebElement viewLink = driver.findElement(By.cssSelector("a.control-view"));
+
+		viewLink.click();
+		Assert.assertNotNull(viewLink);
+
+		confirmPageLoadAndTestHeader("View User");
+
+		testCurrentUrlEndsWith("/users/1");
 	}
 }

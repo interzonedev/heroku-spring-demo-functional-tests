@@ -78,4 +78,11 @@ public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractInt
 		Assert.assertNotNull(pageHeader);
 		Assert.assertTrue(pageHeader.getText().endsWith(headerText));
 	}
+
+	protected void testCurrentUrlEndsWith(String urlEnding) {
+		log.debug("testCurrentUrlEndsWith");
+
+		String currentUrl = driver.getCurrentUrl();
+		Assert.assertTrue(currentUrl.endsWith(urlEnding));
+	}
 }

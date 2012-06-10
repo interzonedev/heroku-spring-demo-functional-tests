@@ -46,13 +46,13 @@ public class ViewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTe
 		Assert.assertNotNull(editLink);
 
 		String editLinkHrefValue = editLink.getAttribute("href");
-		Assert.assertTrue(editLinkHrefValue.contains("/users/1/edit"));
+		Assert.assertTrue(editLinkHrefValue.endsWith("/users/1/edit"));
 
 		WebElement deleteLink = driver.findElement(By.cssSelector("a.control-delete"));
 		Assert.assertNotNull(deleteLink);
 
 		String deleteLinkHrefValue = deleteLink.getAttribute("href");
-		Assert.assertTrue(deleteLinkHrefValue.contains("/users/1?_method=delete"));
+		Assert.assertTrue(deleteLinkHrefValue.endsWith("/users/1?_method=delete"));
 	}
 
 	@Test
@@ -69,8 +69,7 @@ public class ViewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTe
 
 		confirmPageLoadAndTestHeader("User Form");
 
-		String currentUrl = driver.getCurrentUrl();
-		Assert.assertTrue(currentUrl.contains("/users/1/edit"));
+		testCurrentUrlEndsWith("/users/1/edit");
 	}
 
 	@Test
