@@ -2,6 +2,7 @@ package com.interzonedev.herokuspringdemo.functionaltest;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -16,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.interzonedev.herokuspringdemo.functionaltest.driver.WebDriverFactory;
 import com.interzonedev.sprintfix.AbstractIntegrationTest;
 import com.interzonedev.sprintfix.dataset.dbunit.DbUnitDataSetTester;
 
@@ -26,6 +28,12 @@ public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractInt
 			"time_updated" });
 
 	protected Log log = LogFactory.getLog(getClass());
+
+	@Inject
+	private WebDriverFactory webDriverFactory;
+
+	@Inject
+	private Properties functionalTestProperties;
 
 	@Inject
 	protected DataSource dataSource;
@@ -40,7 +48,8 @@ public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractInt
 
 	@Before
 	public void beforeTest() {
-		driver = functionalTestHelper.getWebDriver();
+		String browserId = functionalTestProperties.getProperty("browser");
+		driver = webDriverFactory.getWebDriver(browserId);
 	}
 
 	@After

@@ -1,4 +1,4 @@
-package com.interzonedev.herokuspringdemo.functionaltest;
+package com.interzonedev.herokuspringdemo.functionaltest.driver;
 
 import java.util.LinkedList;
 import java.util.List;

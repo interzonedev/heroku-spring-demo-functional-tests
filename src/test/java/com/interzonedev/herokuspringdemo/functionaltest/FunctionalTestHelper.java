@@ -12,55 +12,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.context.ApplicationContext;
 
 @Named("functionalTestHelper")
 public class FunctionalTestHelper {
 
 	@Inject
 	private Properties functionalTestProperties;
-
-	@Inject
-	private ApplicationContext applicationContext;
-
-	public WebDriver getWebDriver() {
-		return getWebDriver(functionalTestProperties.getProperty("browser"));
-	}
-
-	public WebDriver getWebDriver(String browserId) {
-		if (!Browser.allIds().contains(browserId)) {
-			throw new IllegalArgumentException("Unrecognized browser id: " + browserId);
-		}
-
-		return getWebDriver(Browser.getById(browserId));
-	}
-
-	public WebDriver getWebDriver(Browser browser) {
-
-		WebDriver driver = null;
-
-		switch (browser) {
-			case FIREFOX:
-				driver = (WebDriver) applicationContext.getBean("firefoxDriver");
-				break;
-			case HTMLUNIT:
-				driver = (WebDriver) applicationContext.getBean("htmlUnitDriver");
-				break;
-			case SAFARI:
-				driver = (WebDriver) applicationContext.getBean("safariDriver");
-				break;
-			case CHROME:
-				driver = (WebDriver) applicationContext.getBean("chromeDriver");
-				break;
-			case IE:
-				driver = (WebDriver) applicationContext.getBean("internetExplorerDriver");
-				break;
-			default:
-				throw new IllegalArgumentException("Unrecognized browser: " + browser);
-		}
-
-		return driver;
-	}
 
 	public void openPage(WebDriver driver, String url) {
 		driver.get(functionalTestProperties.getProperty("applicationUrl") + url);
