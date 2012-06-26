@@ -4,33 +4,29 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.interzonedev.herokuspringdemo.functionaltest.driver.WebDriverFactory;
-import com.interzonedev.sprintfix.AbstractIntegrationTest;
 import com.interzonedev.sprintfix.dataset.dbunit.DbUnitDataSetTester;
+import com.interzonedev.spunkfix.AbstractFunctionalTest;
+import com.interzonedev.spunkfix.FunctionalTestProperties;
+import com.interzonedev.spunkfix.driver.Browser;
 
 @ContextConfiguration(locations = { "classpath:com/interzonedev/herokuspringdemo/spring/applicationContext-functionalTest.xml" })
-public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractIntegrationTest {
+public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractFunctionalTest {
 
 	protected static List<String> USERS_IGNORE_COLUMN_NAMES = Arrays.asList(new String[] { "id", "time_created",
 			"time_updated" });
 
 	protected Log log = LogFactory.getLog(getClass());
-
-	@Inject
-	private WebDriverFactory webDriverFactory;
 
 	@Inject
 	private Properties functionalTestProperties;
@@ -41,26 +37,30 @@ public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractInt
 	@Inject
 	protected DbUnitDataSetTester dbUnitDataSetTester;
 
-	@Inject
-	protected FunctionalTestHelper functionalTestHelper;
+	private FunctionalTestProperties functionalTestPropertiesValues;
 
-	protected WebDriver driver;
+	@PostConstruct
+	public void init() {
+		String applicationUrl = functionalTestProperties.getProperty("applicationUrl");
+		String browserValue = functionalTestProperties.getProperty("browser");
+		String elementWaitTimeoutInSecondsValue = functionalTestProperties.getProperty("elementWaitTimeoutInSeconds");
 
-	@Before
-	public void beforeTest() {
-		String browserId = functionalTestProperties.getProperty("browser");
-		driver = webDriverFactory.getWebDriver(browserId);
+		Browser browser = Browser.getById(browserValue);
+		Long elementWaitTimeoutInSeconds = Long.parseLong(elementWaitTimeoutInSecondsValue);
+
+		functionalTestPropertiesValues = new FunctionalTestProperties(browser, applicationUrl,
+				elementWaitTimeoutInSeconds);
 	}
 
-	@After
-	public void afterTest() {
-		driver = null;
+	@Override
+	protected FunctionalTestProperties getFunctionalTestProperties() {
+		return functionalTestPropertiesValues;
 	}
 
 	protected void openPageAndTestHeader(String url, String headerText) {
 		log.debug("openPageAndTestHeader");
 
-		functionalTestHelper.openPage(driver, url);
+		browserOperations.openPage(driver, url);
 
 		confirmPageLoadAndTestHeader(headerText);
 	}
@@ -76,7 +76,7 @@ public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractInt
 	protected void confirmPageLoad() {
 		log.debug("confirmPageLoad");
 
-		WebElement contentContainer = functionalTestHelper.waitForAndGetElement(driver, By.id("contentContainer"));
+		WebElement contentContainer = browserOperations.waitForAndGetElement(driver, By.id("contentContainer"));
 		Assert.assertNotNull(contentContainer);
 	}
 

@@ -95,7 +95,7 @@ public class ViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunction
 
 		confirmation.accept();
 
-		List<WebElement> userContainersAfter = functionalTestHelper.waitForAndGetElements(driver,
+		List<WebElement> userContainersAfter = browserOperations.waitForAndGetElements(driver,
 				By.cssSelector("div.userContainer"));
 		Assert.assertNotNull(userContainersAfter);
 		Assert.assertEquals(1, userContainersAfter.size());
@@ -125,7 +125,7 @@ public class ViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunction
 
 		confirmation.dismiss();
 
-		List<WebElement> userContainersAfter = functionalTestHelper.waitForAndGetElements(driver,
+		List<WebElement> userContainersAfter = browserOperations.waitForAndGetElements(driver,
 				By.cssSelector("div.userContainer"));
 		Assert.assertNotNull(userContainersAfter);
 		Assert.assertEquals(2, userContainersAfter.size());

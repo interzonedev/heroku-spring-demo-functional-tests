@@ -40,8 +40,8 @@
 
 		<dependency>
 			<groupId>com.interzonedev</groupId>
-			<artifactId>sprintfix</artifactId>
-			<version>0.2.6</version>
+			<artifactId>spunkfix</artifactId>
+			<version>0.1.0</version>
 			<scope>test</scope>
 		</dependency>
 
