@@ -1,4 +1,4 @@
-package com.interzonedev.herokuspringdemo.home;
+package com.interzonedev.herokuspringdemo.functionaltest.home;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

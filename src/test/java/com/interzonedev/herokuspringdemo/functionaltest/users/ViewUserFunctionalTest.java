@@ -1,4 +1,4 @@
-package com.interzonedev.herokuspringdemo.users;
+package com.interzonedev.herokuspringdemo.functionaltest.users;
 
 import org.junit.Assert;
 import org.junit.Test;

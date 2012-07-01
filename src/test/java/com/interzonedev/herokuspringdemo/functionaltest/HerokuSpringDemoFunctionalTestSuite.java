@@ -4,8 +4,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.interzonedev.herokuspringdemo.home.HomeTestSuite;
-import com.interzonedev.herokuspringdemo.users.UsersTestSuite;
+import com.interzonedev.herokuspringdemo.functionaltest.home.HomeTestSuite;
+import com.interzonedev.herokuspringdemo.functionaltest.users.UsersTestSuite;
 
 @RunWith(Suite.class)
 @SuiteClasses({ HomeTestSuite.class, UsersTestSuite.class })
