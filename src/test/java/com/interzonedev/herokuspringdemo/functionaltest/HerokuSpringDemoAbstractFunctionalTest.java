@@ -15,10 +15,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.interzonedev.pienburger.AbstractFunctionalTest;
+import com.interzonedev.pienburger.FunctionalTestProperties;
+import com.interzonedev.pienburger.driver.Browser;
 import com.interzonedev.sprintfix.dataset.dbunit.DbUnitDataSetTester;
-import com.interzonedev.spunkfix.AbstractFunctionalTest;
-import com.interzonedev.spunkfix.FunctionalTestProperties;
-import com.interzonedev.spunkfix.driver.Browser;
 
 @ContextConfiguration(locations = { "classpath:com/interzonedev/herokuspringdemo/spring/applicationContext-functionalTest.xml" })
 public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractFunctionalTest {
