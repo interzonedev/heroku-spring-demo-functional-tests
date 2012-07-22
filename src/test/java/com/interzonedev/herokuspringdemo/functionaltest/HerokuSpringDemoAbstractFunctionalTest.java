@@ -18,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import com.interzonedev.pienburger.AbstractFunctionalTest;
 import com.interzonedev.pienburger.FunctionalTestProperties;
 import com.interzonedev.pienburger.driver.Browser;
-import com.interzonedev.sprintfix.dataset.dbunit.DbUnitDataSetTester;
+import com.interzonedev.zankou.dataset.dbunit.DbUnitDataSetTester;
 
 @ContextConfiguration(locations = { "classpath:com/interzonedev/herokuspringdemo/spring/applicationContext-functionalTest.xml" })
 public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractFunctionalTest {

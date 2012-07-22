@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstractFunctionalTest;
-import com.interzonedev.sprintfix.dataset.DataSet;
+import com.interzonedev.zankou.dataset.DataSet;
 
 public class EditUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTest {
 
