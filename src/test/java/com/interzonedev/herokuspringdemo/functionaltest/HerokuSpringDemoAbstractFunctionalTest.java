@@ -8,12 +8,13 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
+
+import ch.qos.logback.classic.Logger;
 
 import com.interzonedev.pienburger.AbstractFunctionalTest;
 import com.interzonedev.pienburger.FunctionalTestProperties;
@@ -26,7 +27,7 @@ public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractFun
 	protected static List<String> USERS_IGNORE_COLUMN_NAMES = Arrays.asList(new String[] { "id", "time_created",
 			"time_updated" });
 
-	protected Log log = LogFactory.getLog(getClass());
+	protected final Logger log = (Logger) LoggerFactory.getLogger(getClass());
 
 	@Inject
 	private Properties functionalTestProperties;
