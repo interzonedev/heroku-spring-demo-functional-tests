@@ -1,6 +1,7 @@
 package com.interzonedev.herokuspringdemo.functionaltest.users;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -72,6 +73,7 @@ public class ViewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTe
 		testCurrentUrlEndsWith("/users/1/edit");
 	}
 
+	@Ignore("HtmlUnit does not support alerts")
 	@Test
 	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
 	public void testViewUserClickDeleteLinkAccept() {
@@ -93,6 +95,7 @@ public class ViewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTe
 		confirmPageLoadAndTestHeader("View All Users");
 	}
 
+	@Ignore("HtmlUnit does not support alerts")
 	@Test
 	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
 	public void testViewUserClickDeleteLinkDismiss() {

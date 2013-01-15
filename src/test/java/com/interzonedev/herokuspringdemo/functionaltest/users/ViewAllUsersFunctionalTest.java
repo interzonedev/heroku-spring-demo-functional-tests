@@ -3,6 +3,7 @@ package com.interzonedev.herokuspringdemo.functionaltest.users;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -71,6 +72,7 @@ public class ViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunction
 		confirmPageLoadAndTestHeader("User Form");
 	}
 
+	@Ignore("HtmlUnit does not support alerts")
 	@Test
 	@DataSet(filename = "dataset/users/multiUsersDataSet.xml", dataSourceBeanId = "dataSource")
 	public void testViewAllUsersDeleteUserAccept() {
@@ -101,6 +103,7 @@ public class ViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunction
 		Assert.assertEquals(1, userContainersAfter.size());
 	}
 
+	@Ignore("HtmlUnit does not support alerts")
 	@Test
 	@DataSet(filename = "dataset/users/multiUsersDataSet.xml", dataSourceBeanId = "dataSource")
 	public void testViewAllUsersDeleteUserDismiss() {
