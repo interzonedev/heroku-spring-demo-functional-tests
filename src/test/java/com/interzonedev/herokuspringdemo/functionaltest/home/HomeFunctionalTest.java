@@ -9,71 +9,71 @@ import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstract
 
 public class HomeFunctionalTest extends HerokuSpringDemoAbstractFunctionalTest {
 
-	@Test
-	public void testHomeFullUrl() {
-		log.debug("testHomeFullUrl");
+    @Test
+    public void testHomeFullUrl() {
+        log.debug("testHomeFullUrl");
 
-		openPageAndTestHeader("home", "Home");
-	}
+        openPageAndTestHeader("home", "Home");
+    }
 
-	@Test
-	public void testHomeDefaultUrl() {
-		log.debug("testHomeDefaultUrl");
+    @Test
+    public void testHomeDefaultUrl() {
+        log.debug("testHomeDefaultUrl");
 
-		openPageAndTestHeader("", "Home");
-	}
+        openPageAndTestHeader("", "Home");
+    }
 
-	@Test
-	public void testHomeLink() {
-		log.debug("testHomeLink");
+    @Test
+    public void testHomeLink() {
+        log.debug("testHomeLink");
 
-		openPageAndTestHeader("home", "Home");
+        openPageAndTestHeader("home", "Home");
 
-		WebElement homeLink = driver.findElement(By.xpath("//div[@id='topNav']/a"));
-		Assert.assertNotNull(homeLink);
-		Assert.assertTrue(homeLink.getText().equals("Home"));
+        WebElement homeLink = driver.findElement(By.xpath("//div[@id='topNav']/a"));
+        Assert.assertNotNull(homeLink);
+        Assert.assertTrue(homeLink.getText().equals("Home"));
 
-		String homeLinkHrefValue = homeLink.getAttribute("href");
-		Assert.assertTrue(homeLinkHrefValue.endsWith("/home"));
+        String homeLinkHrefValue = homeLink.getAttribute("href");
+        Assert.assertTrue(homeLinkHrefValue.endsWith("/home"));
 
-		homeLink.click();
+        homeLink.click();
 
-		confirmPageLoadAndTestHeader("Home");
-	}
+        confirmPageLoadAndTestHeader("Home");
+    }
 
-	@Test
-	public void testCreateNewUserLink() {
-		log.debug("testCreateNewUserLink");
+    @Test
+    public void testCreateNewUserLink() {
+        log.debug("testCreateNewUserLink");
 
-		openPageAndTestHeader("home", "Home");
+        openPageAndTestHeader("home", "Home");
 
-		WebElement createNewUserLink = driver.findElement(By.xpath("//div[@id='topNav']/a[2]"));
-		Assert.assertNotNull(createNewUserLink);
-		Assert.assertTrue(createNewUserLink.getText().equals("User Form"));
+        WebElement createNewUserLink = driver.findElement(By.xpath("//div[@id='topNav']/a[2]"));
+        Assert.assertNotNull(createNewUserLink);
+        Assert.assertTrue(createNewUserLink.getText().equals("User Form"));
 
-		String createNewUserPageLinkHrefValue = createNewUserLink.getAttribute("href");
-		Assert.assertTrue(createNewUserPageLinkHrefValue.endsWith("/users/new"));
+        String createNewUserPageLinkHrefValue = createNewUserLink.getAttribute("href");
+        Assert.assertTrue(createNewUserPageLinkHrefValue.endsWith("/users/new"));
 
-		createNewUserLink.click();
+        createNewUserLink.click();
 
-		confirmPageLoadAndTestHeader("User Form");
-	}
+        confirmPageLoadAndTestHeader("User Form");
+    }
 
-	@Test
-	public void testViewAllUsersLink() {
-		log.debug("testViewAllUsersLink");
+    @Test
+    public void testViewAllUsersLink() {
+        log.debug("testViewAllUsersLink");
 
-		openPageAndTestHeader("home", "Home");
+        openPageAndTestHeader("home", "Home");
 
-		WebElement viewAllUsersLink = driver.findElement(By.xpath("//div[@id='topNav']/a[3]"));
-		Assert.assertNotNull(viewAllUsersLink);
-		Assert.assertTrue(viewAllUsersLink.getText().equals("All Users"));
+        WebElement viewAllUsersLink = driver.findElement(By.xpath("//div[@id='topNav']/a[3]"));
+        Assert.assertNotNull(viewAllUsersLink);
+        Assert.assertTrue(viewAllUsersLink.getText().equals("All Users"));
 
-		String viewAllUsersLinkHrefValue = viewAllUsersLink.getAttribute("href");
-		Assert.assertTrue(viewAllUsersLinkHrefValue.endsWith("/users"));
+        String viewAllUsersLinkHrefValue = viewAllUsersLink.getAttribute("href");
+        Assert.assertTrue(viewAllUsersLinkHrefValue.endsWith("/users"));
 
-		viewAllUsersLink.click();
+        viewAllUsersLink.click();
 
-		confirmPageLoadAndTestHeader("View All Users");
-	}
+        confirmPageLoadAndTestHeader("View All Users");
+    }
 }

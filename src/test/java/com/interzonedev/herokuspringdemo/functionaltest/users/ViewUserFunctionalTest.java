@@ -12,108 +12,108 @@ import com.interzonedev.zankou.dataset.DataSet;
 
 public class ViewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTest {
 
-	@Test
-	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
-	public void testViewUserNonExistentUser() {
-		log.debug("testViewUserNonExistentUser");
+    @Test
+    @DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+    public void testViewUserNonExistentUser() {
+        log.debug("testViewUserNonExistentUser");
 
-		openPageAndTestHeader("users/2", "Error");
+        openPageAndTestHeader("users/2", "Error");
 
-		WebElement errorContainer = driver.findElement(By.cssSelector("div#errorsContainer div.errorContainer"));
+        WebElement errorContainer = driver.findElement(By.cssSelector("div#errorsContainer div.errorContainer"));
 
-		Assert.assertTrue(errorContainer.getText().contains("Could not find the specified resource."));
-	}
+        Assert.assertTrue(errorContainer.getText().contains("Could not find the specified resource."));
+    }
 
-	@Test
-	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
-	public void testViewUserExistentUser() {
-		log.debug("testViewUserExistentUser");
+    @Test
+    @DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+    public void testViewUserExistentUser() {
+        log.debug("testViewUserExistentUser");
 
-		openPageAndTestHeader("users/1", "View User");
+        openPageAndTestHeader("users/1", "View User");
 
-		WebElement firstNameContainer = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]"));
-		Assert.assertNotNull(firstNameContainer);
-		Assert.assertTrue(firstNameContainer.getText().contains("First Name: Gern"));
+        WebElement firstNameContainer = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]"));
+        Assert.assertNotNull(firstNameContainer);
+        Assert.assertTrue(firstNameContainer.getText().contains("First Name: Gern"));
 
-		WebElement lastNameContainer = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[3]"));
-		Assert.assertNotNull(lastNameContainer);
-		Assert.assertTrue(lastNameContainer.getText().contains("Last Name: Blanston"));
+        WebElement lastNameContainer = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[3]"));
+        Assert.assertNotNull(lastNameContainer);
+        Assert.assertTrue(lastNameContainer.getText().contains("Last Name: Blanston"));
 
-		WebElement adminContainer = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[4]"));
-		Assert.assertNotNull(adminContainer);
-		Assert.assertTrue(adminContainer.getText().contains("Admin: true"));
+        WebElement adminContainer = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[4]"));
+        Assert.assertNotNull(adminContainer);
+        Assert.assertTrue(adminContainer.getText().contains("Admin: true"));
 
-		WebElement editLink = driver.findElement(By.cssSelector("a.control-edit"));
-		Assert.assertNotNull(editLink);
+        WebElement editLink = driver.findElement(By.cssSelector("a.control-edit"));
+        Assert.assertNotNull(editLink);
 
-		String editLinkHrefValue = editLink.getAttribute("href");
-		Assert.assertTrue(editLinkHrefValue.endsWith("/users/1/edit"));
+        String editLinkHrefValue = editLink.getAttribute("href");
+        Assert.assertTrue(editLinkHrefValue.endsWith("/users/1/edit"));
 
-		WebElement deleteLink = driver.findElement(By.cssSelector("a.control-delete"));
-		Assert.assertNotNull(deleteLink);
+        WebElement deleteLink = driver.findElement(By.cssSelector("a.control-delete"));
+        Assert.assertNotNull(deleteLink);
 
-		String deleteLinkHrefValue = deleteLink.getAttribute("href");
-		Assert.assertTrue(deleteLinkHrefValue.endsWith("/users/1?_method=delete"));
-	}
+        String deleteLinkHrefValue = deleteLink.getAttribute("href");
+        Assert.assertTrue(deleteLinkHrefValue.endsWith("/users/1?_method=delete"));
+    }
 
-	@Test
-	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
-	public void testViewUserClickEditLink() {
-		log.debug("testViewUserClickEditLink");
+    @Test
+    @DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+    public void testViewUserClickEditLink() {
+        log.debug("testViewUserClickEditLink");
 
-		openPageAndTestHeader("users/1", "View User");
+        openPageAndTestHeader("users/1", "View User");
 
-		WebElement editLink = driver.findElement(By.cssSelector("a.control-edit"));
-		Assert.assertNotNull(editLink);
+        WebElement editLink = driver.findElement(By.cssSelector("a.control-edit"));
+        Assert.assertNotNull(editLink);
 
-		editLink.click();
+        editLink.click();
 
-		confirmPageLoadAndTestHeader("User Form");
+        confirmPageLoadAndTestHeader("User Form");
 
-		testCurrentUrlEndsWith("/users/1/edit");
-	}
+        testCurrentUrlEndsWith("/users/1/edit");
+    }
 
-	@Ignore("HtmlUnit does not support alerts")
-	@Test
-	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
-	public void testViewUserClickDeleteLinkAccept() {
-		log.debug("testViewUserClickDeleteLinkAccept");
+    @Ignore("HtmlUnit does not support alerts")
+    @Test
+    @DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+    public void testViewUserClickDeleteLinkAccept() {
+        log.debug("testViewUserClickDeleteLinkAccept");
 
-		openPageAndTestHeader("users/1", "View User");
+        openPageAndTestHeader("users/1", "View User");
 
-		WebElement deleteLink = driver.findElement(By.cssSelector("a.control-delete"));
-		Assert.assertNotNull(deleteLink);
+        WebElement deleteLink = driver.findElement(By.cssSelector("a.control-delete"));
+        Assert.assertNotNull(deleteLink);
 
-		deleteLink.click();
+        deleteLink.click();
 
-		Alert confirmation = driver.switchTo().alert();
-		String confirmationText = confirmation.getText();
-		Assert.assertEquals("Are you sure you want to delete the user?", confirmationText);
+        Alert confirmation = driver.switchTo().alert();
+        String confirmationText = confirmation.getText();
+        Assert.assertEquals("Are you sure you want to delete the user?", confirmationText);
 
-		confirmation.accept();
+        confirmation.accept();
 
-		confirmPageLoadAndTestHeader("View All Users");
-	}
+        confirmPageLoadAndTestHeader("View All Users");
+    }
 
-	@Ignore("HtmlUnit does not support alerts")
-	@Test
-	@DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
-	public void testViewUserClickDeleteLinkDismiss() {
-		log.debug("testViewUserClickDeleteLinkDismiss");
+    @Ignore("HtmlUnit does not support alerts")
+    @Test
+    @DataSet(filename = "dataset/users/usersDataSet.xml", dataSourceBeanId = "dataSource")
+    public void testViewUserClickDeleteLinkDismiss() {
+        log.debug("testViewUserClickDeleteLinkDismiss");
 
-		openPageAndTestHeader("users/1", "View User");
+        openPageAndTestHeader("users/1", "View User");
 
-		WebElement deleteLink = driver.findElement(By.cssSelector("a.control-delete"));
-		Assert.assertNotNull(deleteLink);
+        WebElement deleteLink = driver.findElement(By.cssSelector("a.control-delete"));
+        Assert.assertNotNull(deleteLink);
 
-		deleteLink.click();
+        deleteLink.click();
 
-		Alert confirmation = driver.switchTo().alert();
-		String confirmationText = confirmation.getText();
-		Assert.assertEquals("Are you sure you want to delete the user?", confirmationText);
+        Alert confirmation = driver.switchTo().alert();
+        String confirmationText = confirmation.getText();
+        Assert.assertEquals("Are you sure you want to delete the user?", confirmationText);
 
-		confirmation.dismiss();
+        confirmation.dismiss();
 
-		testHeader("View User");
-	}
+        testHeader("View User");
+    }
 }

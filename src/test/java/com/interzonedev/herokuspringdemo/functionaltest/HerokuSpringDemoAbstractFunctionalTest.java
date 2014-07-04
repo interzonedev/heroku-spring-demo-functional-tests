@@ -24,75 +24,75 @@ import com.interzonedev.zankou.dataset.dbunit.DbUnitDataSetTester;
 @ContextConfiguration(locations = { "classpath:com/interzonedev/herokuspringdemo/spring/applicationContext-functionalTest.xml" })
 public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractFunctionalTest {
 
-	protected static List<String> USERS_IGNORE_COLUMN_NAMES = Arrays.asList(new String[] { "id", "time_created",
-			"time_updated" });
+    protected static List<String> USERS_IGNORE_COLUMN_NAMES = Arrays.asList(new String[] { "id", "time_created",
+            "time_updated" });
 
-	protected final Logger log = (Logger) LoggerFactory.getLogger(getClass());
+    protected final Logger log = (Logger) LoggerFactory.getLogger(getClass());
 
-	@Inject
-	private Properties functionalTestProperties;
+    @Inject
+    private Properties functionalTestProperties;
 
-	@Inject
-	protected DataSource dataSource;
+    @Inject
+    protected DataSource dataSource;
 
-	@Inject
-	protected DbUnitDataSetTester dbUnitDataSetTester;
+    @Inject
+    protected DbUnitDataSetTester dbUnitDataSetTester;
 
-	private FunctionalTestProperties functionalTestPropertiesValues;
+    private FunctionalTestProperties functionalTestPropertiesValues;
 
-	@PostConstruct
-	public void init() {
-		String applicationUrl = functionalTestProperties.getProperty("applicationUrl");
-		String browserValue = functionalTestProperties.getProperty("browser");
-		String elementWaitTimeoutInSecondsValue = functionalTestProperties.getProperty("elementWaitTimeoutInSeconds");
+    @PostConstruct
+    public void init() {
+        String applicationUrl = functionalTestProperties.getProperty("applicationUrl");
+        String browserValue = functionalTestProperties.getProperty("browser");
+        String elementWaitTimeoutInSecondsValue = functionalTestProperties.getProperty("elementWaitTimeoutInSeconds");
 
-		Browser browser = Browser.getById(browserValue);
-		Long elementWaitTimeoutInSeconds = Long.parseLong(elementWaitTimeoutInSecondsValue);
+        Browser browser = Browser.getById(browserValue);
+        Long elementWaitTimeoutInSeconds = Long.parseLong(elementWaitTimeoutInSecondsValue);
 
-		functionalTestPropertiesValues = new FunctionalTestProperties(browser, applicationUrl,
-				elementWaitTimeoutInSeconds);
-	}
+        functionalTestPropertiesValues = new FunctionalTestProperties(browser, applicationUrl,
+                elementWaitTimeoutInSeconds);
+    }
 
-	@Override
-	protected FunctionalTestProperties getFunctionalTestProperties() {
-		return functionalTestPropertiesValues;
-	}
+    @Override
+    protected FunctionalTestProperties getFunctionalTestProperties() {
+        return functionalTestPropertiesValues;
+    }
 
-	protected void openPageAndTestHeader(String url, String headerText) {
-		log.debug("openPageAndTestHeader");
+    protected void openPageAndTestHeader(String url, String headerText) {
+        log.debug("openPageAndTestHeader");
 
-		browserOperations.openPage(driver, url);
+        browserOperations.openPage(driver, url);
 
-		confirmPageLoadAndTestHeader(headerText);
-	}
+        confirmPageLoadAndTestHeader(headerText);
+    }
 
-	protected void confirmPageLoadAndTestHeader(String headerText) {
-		log.debug("confirmPageLoadAndTestHeader");
+    protected void confirmPageLoadAndTestHeader(String headerText) {
+        log.debug("confirmPageLoadAndTestHeader");
 
-		confirmPageLoad();
+        confirmPageLoad();
 
-		testHeader(headerText);
-	}
+        testHeader(headerText);
+    }
 
-	protected void confirmPageLoad() {
-		log.debug("confirmPageLoad");
+    protected void confirmPageLoad() {
+        log.debug("confirmPageLoad");
 
-		WebElement contentContainer = browserOperations.waitForAndGetElement(driver, By.id("contentContainer"));
-		Assert.assertNotNull(contentContainer);
-	}
+        WebElement contentContainer = browserOperations.waitForAndGetElement(driver, By.id("contentContainer"));
+        Assert.assertNotNull(contentContainer);
+    }
 
-	protected void testHeader(String headerText) {
-		log.debug("testHeader");
+    protected void testHeader(String headerText) {
+        log.debug("testHeader");
 
-		WebElement pageHeader = driver.findElement(By.cssSelector("div#contentContainer div.pageHeader"));
-		Assert.assertNotNull(pageHeader);
-		Assert.assertTrue(pageHeader.getText().endsWith(headerText));
-	}
+        WebElement pageHeader = driver.findElement(By.cssSelector("div#contentContainer div.pageHeader"));
+        Assert.assertNotNull(pageHeader);
+        Assert.assertTrue(pageHeader.getText().endsWith(headerText));
+    }
 
-	protected void testCurrentUrlEndsWith(String urlEnding) {
-		log.debug("testCurrentUrlEndsWith");
+    protected void testCurrentUrlEndsWith(String urlEnding) {
+        log.debug("testCurrentUrlEndsWith");
 
-		String currentUrl = driver.getCurrentUrl();
-		Assert.assertTrue(currentUrl.endsWith(urlEnding));
-	}
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue(currentUrl.endsWith(urlEnding));
+    }
 }
