@@ -5,9 +5,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstractFunctionalTest;
+import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstractFT;
 
-public class HomeFunctionalTest extends HerokuSpringDemoAbstractFunctionalTest {
+public class HomeFT extends HerokuSpringDemoAbstractFT {
 
     @Test
     public void testHomeFullUrl() {

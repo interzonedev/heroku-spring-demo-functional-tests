@@ -9,10 +9,10 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstractFunctionalTest;
+import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstractFT;
 import com.interzonedev.zankou.dataset.DataSet;
 
-public class ViewAllUsersFunctionalTest extends HerokuSpringDemoAbstractFunctionalTest {
+public class ViewAllUsersFT extends HerokuSpringDemoAbstractFT {
 
     @Test
     @DataSet(filename = "dataset/users/multiUsersDataSet.xml", dataSourceBeanId = "dataSource")

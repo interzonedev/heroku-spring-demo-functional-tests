@@ -5,6 +5,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ HomeFunctionalTest.class })
+@SuiteClasses({ HomeFT.class })
 public class HomeTestSuite {
 }

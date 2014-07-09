@@ -22,7 +22,7 @@ import com.interzonedev.pienburger.driver.Browser;
 import com.interzonedev.zankou.dataset.dbunit.DbUnitDataSetTester;
 
 @ContextConfiguration(locations = { "classpath:com/interzonedev/herokuspringdemo/spring/applicationContext-functionalTest.xml" })
-public abstract class HerokuSpringDemoAbstractFunctionalTest extends AbstractFunctionalTest {
+public abstract class HerokuSpringDemoAbstractFT extends AbstractFunctionalTest {
 
     protected static List<String> USERS_IGNORE_COLUMN_NAMES = Arrays.asList(new String[] { "id", "time_created",
             "time_updated" });

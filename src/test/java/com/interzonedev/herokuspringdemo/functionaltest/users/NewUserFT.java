@@ -8,10 +8,10 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstractFunctionalTest;
+import com.interzonedev.herokuspringdemo.functionaltest.HerokuSpringDemoAbstractFT;
 import com.interzonedev.zankou.dataset.DataSet;
 
-public class NewUserFunctionalTest extends HerokuSpringDemoAbstractFunctionalTest {
+public class NewUserFT extends HerokuSpringDemoAbstractFT {
 
     @Test
     public void testDisplayNewUserForm() {
