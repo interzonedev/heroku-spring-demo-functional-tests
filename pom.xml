@@ -6,43 +6,36 @@
     <parent>
         <groupId>com.interzonedev</groupId>
         <artifactId>interzonedev-parent</artifactId>
-        <version>2.3.0</version>
+        <version>2.5.0</version>
     </parent>
 
     <artifactId>heroku-spring-demo-functional-tests</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
+    <version>${heroku.spring.demo.version}</version>
     <packaging>jar</packaging>
 
     <name>Heroku Spring Demo Webapp Functionl Tests</name>
     <description>
-		Functional tests for the Heroku Spring demo webapp.
-	</description>
+        Functional tests for the Heroku Spring demo webapp.
+    </description>
     <url>https://github.com/interzonedev/herokuSpringDemoFunctionalTests</url>
     <inceptionYear>2012</inceptionYear>
 
     <properties>
-        <spring.version>4.0.6.RELEASE</spring.version>
+        <heroku.spring.demo.version>2.3.0-SNAPSHOT</heroku.spring.demo.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.interzonedev</groupId>
             <artifactId>heroku-spring-demo</artifactId>
-            <version>2.2.0-SNAPSHOT</version>
+            <version>${heroku.spring.demo.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>com.interzonedev</groupId>
             <artifactId>pienburger</artifactId>
-            <version>1.0.3</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>2.42.2</version>
+            <version>1.0.4</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
