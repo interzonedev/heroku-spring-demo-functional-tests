@@ -17,7 +17,7 @@
     <description>
         Functional tests for the Heroku Spring demo webapp.
     </description>
-    <url>https://github.com/interzonedev/herokuSpringDemoFunctionalTests</url>
+    <url>https://github.com/interzonedev/heroku-spring-demo-functional-tests</url>
     <inceptionYear>2012</inceptionYear>
 
     <properties>
