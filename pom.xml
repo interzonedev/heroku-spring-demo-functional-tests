@@ -35,7 +35,7 @@
         <dependency>
             <groupId>com.interzonedev</groupId>
             <artifactId>pienburger</artifactId>
-            <version>1.0.4</version>
+            <version>1.1.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
